@@ -115,6 +115,7 @@ def download_audio(
         "outtmpl": output_template,
         "quiet": False,
         "no_warnings": False,
+        "ignoreerrors": True,
         "progress_hooks": hooks,
     }
 
@@ -123,8 +124,19 @@ def download_audio(
             logger.info("Extracting info and downloading: %s", url)
             info = ydl.extract_info(url, download=True)
 
+            if info is None:
+                logger.error("Could not extract info for: %s", url)
+                return None
+
             # For playlists yt-dlp returns a dict with an "entries" key.
             if "entries" in info:
+                entries = list(info["entries"])
+                skipped = sum(1 for e in entries if e is None)
+                if skipped:
+                    logger.warning(
+                        "Skipped %d unavailable/private video(s) in playlist.",
+                        skipped,
+                    )
                 title = info.get("title", "playlist")
             else:
                 title = info.get("title", "audio")
