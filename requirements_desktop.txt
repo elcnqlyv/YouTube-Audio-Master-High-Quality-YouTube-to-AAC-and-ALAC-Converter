@@ -7,6 +7,9 @@
 5. `ffmpeg`
 6. `mpv`
 7. `vlc`
+FreeSimpleGUI
+yt-dlp
+ffmpeg-python
 
 # Instructions
-Install these dependencies using the package manager for your operating system.
+#Install these dependencies using the package manager for your operating system.
