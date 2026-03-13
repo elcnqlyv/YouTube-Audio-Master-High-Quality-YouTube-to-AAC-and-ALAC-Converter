@@ -71,7 +71,7 @@ def build_executable():
         f'--name=YouTubeAudioMaster '
         f'--icon=NONE '
         f'{hidden_imports_str} '
-        f'desktop_app_Version2.py'
+        f'desktop_app.py'
     )
     
     print(f"\n🔨 Building executable...")
